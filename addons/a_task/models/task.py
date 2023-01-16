@@ -16,6 +16,7 @@ class task_ticket(osv.osv):
         'total': fields.float(string="Total"),
     }
 
+
     @api.onchange('task_line_id')
     def onchange_total(self):
         total = 0
