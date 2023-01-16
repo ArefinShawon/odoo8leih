@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="subtask_entry_form" model="ir.ui.view">
+            <field name="name">task.test.views</field>
+            <field name="model">task.test.entry</field>
+            <field name="arch" type="xml">
+            <form string="Sub Task Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="subtask_entry_tree" model="ir.ui.view">
+            <field name="name">task.test.tree</field>
+            <field name="model">task.test.entry</field>
+            <field name="arch" type="xml">
+            <tree string="Sub Task List">
+                <field name="name"/>
+            </tree>
+            </field>
+        </record>
+
+        <record id="subtask_action" model="ir.actions.act_window">
+            <field name="name">Task Info</field>
+            <field name="res_model">task.test.entry</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem name="Task Entry" id="subtask_info_menu" parent="task_info_menu" action="subtask_action"/>
+
+    </data>
+</openerp>

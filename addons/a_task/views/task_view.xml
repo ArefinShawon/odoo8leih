@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="task_info_form" model="ir.ui.view">
+            <field name="name">task.test.form</field>
+            <field name="model">task.test</field>
+            <field name="arch" type="xml">
+            <form string="Task Form">
+                <header>
+                    <button string="Confirm" type="object" name="task_confirm"/>
+                    <button string="Approve" type="object" name="task_approve"/>
+                    <button string="Cancel" type="object" name="task_cancel"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group string="Task Info">
+                        <field name="user_name"/>
+                        <field name="remarks"/>
+                        <field name="total"/>
+                    </group>
+                    <notebook>
+                        <page string="Task Line Info">
+                            <field name="task_line_id" mode="tree">
+                                <tree string="task" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="subtask_amount"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="task_info_tree" model="ir.ui.view">
+            <field name="name">task.test.tree</field>
+            <field name="model">task.test</field>
+            <field name="arch" type="xml">
+            <tree string="Task List">
+                <field name="user_name"/>
+                <field name="total"/>
+                <field name="remarks"/>
+                <field name="state"/>
+            </tree>
+            </field>
+        </record>
+
+        <record id="task_action" model="ir.actions.act_window">
+            <field name="name">Task Info</field>
+            <field name="res_model">task.test</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem name="Task Management" id="task_main_menu"/>
+        <menuitem name="Task Info" id="task_info_menu" parent="task_main_menu"/>
+        <menuitem name="Task Details" id="task_details_menu" parent="task_info_menu" sequence="1" action="task_action"/>
+
+    </data>
+</openerp>
