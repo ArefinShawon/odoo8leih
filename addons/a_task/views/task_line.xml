@@ -8,7 +8,7 @@
             <form string="Sub Task Form">
                 <sheet>
                     <group>
-                        <field name="name"/>
+                        <field name="name" placeholder="Create a task"/>
                     </group>
                 </sheet>
             </form>

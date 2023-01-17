@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="customer_view" model="ir.ui.view">
+            <field name="name">inventory.item.views</field>
+            <field name="model">inventory.item</field>
+            <field name="arch" type="xml">
+            <form string="OPD">
+                <header>
+                    <button string="Cancel" type="object" name="inventory_cancel"/>
+                    <button string="Confirm" type="object" name="inventory_confirm"/>
+                    <button string="Approve" type="object" name="inventory_approve"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="customer_name"/>
+                            <field name="age"/>
+                            <field name="phone" onchange="validate_phone(phone)" placeholder="Enter your mobile number"/>
+                        </group>
+                        <group>
+                            <group>
+                                 <field name="date"/>
+                            </group>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Inventory Item">
+                            <field name="inventory_line_id" mode="tree">
+                                <tree string="Select Inventory Item" editable="top">
+                                    <field name="name" on_change="onchange_item(name, context)"/>
+                                    <field name="date"/>
+                                    <field name="quantity"/>
+                                    <field name="unit_price"/>
+                                    <field name="sub_total_amount"/>
+                                    <field name="note"/>
+                                </tree>
+                            </field><br/><br/><br/><br/>
+                            <group class="oe_subtotal_footer oe_right">
+<!--                                <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                                <div>-->
+<!--                                    <label for="amount_tax"/>-->
+<!--                                    <button name="button_reset_taxes" states="draft,proforma2"-->
+<!--                                        string="(update)" class="oe_link oe_edit_only"-->
+<!--                                        type="object" help="Recompute taxes and total"/>-->
+<!--                                </div>-->
+<!--                                <field name="amount_tax" nolabel="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                                <field name="amount_total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+
+<!--                                <field name="residual" widget="monetary" options="{'currency_field': 'currency_id'}"/>-->
+<!--                                <field name="reconciled" invisible="1"/>-->
+                                <group name="total_group" position="bottom-right">
+                                    <field name="total" class="oe_subtotal_footer_separator" style="margin-bottom: -.5px;" readonly="1"/>
+                                </group>
+                            </group>
+                            <group name="total_group" position="bottom-right">
+<!--                                <field name="total"/>-->
+                            </group>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="customer_tree" >
+            <field name="name">inventory</field>
+            <field name="model">inventory.item</field>
+            <field name="arch" type="xml">
+            <tree string="Item List">
+                <field name="date"/>
+                <field name="customer_name"/>
+                <field name="age"/>
+                <field name="phone" required="1"/>
+                <field name="total"/>
+                <field name="state"/>
+            </tree>
+            </field>
+        </record>
+
+        <record id="inventory_action" model="ir.actions.act_window">
+            <field name="name">Inventory</field>
+            <field name="res_model">inventory.item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem name="Inventory" id="user_value_menu"/>
+        <menuitem id="inventory_data_holder" name="User Info" parent="user_value_menu"/>
+        <menuitem name="User Order Entry" id="inventory_menu_mainform" parent="inventory_data_holder" action="inventory_action"/>
+
+    </data>
+</openerp>

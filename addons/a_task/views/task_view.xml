@@ -11,13 +11,19 @@
                     <button string="Confirm" type="object" name="task_confirm"/>
                     <button string="Approve" type="object" name="task_approve"/>
                     <button string="Cancel" type="object" name="task_cancel"/>
+<!--                    <field name="state" widget="statusbar" options="{'clickable':1}"/>-->
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <group string="Task Info">
-                        <field name="user_name"/>
-                        <field name="remarks"/>
-                        <field name="total"/>
+                    <group>
+                        <group string="Task Info">
+                            <field name="user_name" placeholder="Enter username"/>
+                            <field name="mobile" placeholder="Enter mobile number"/>
+                            <field name="age" placeholder="Enter age"/>
+                        </group>
+                        <group string="Remarks">
+                            <field name="remarks" placeholder="Add a comment"/>
+                        </group>
                     </group>
                     <notebook>
                         <page string="Task Line Info">
@@ -25,10 +31,18 @@
                                 <tree string="task" editable="bottom">
                                     <field name="name"/>
                                     <field name="date"/>
-                                    <field name="subtask_amount"/>
+                                    <field name="unit_price"/>
                                     <field name="note"/>
                                 </tree>
                             </field>
+                            <br/>
+                            <group class="oe_subtotal_footer oe_right">
+                                <group name="total_group" position="bottom-right">
+                                    <field name="total" class="oe_subtotal_footer_separator"/>
+                                </group>
+                            </group>
+                            <group name="total_group" position="bottom-right">
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
@@ -42,6 +56,8 @@
             <field name="arch" type="xml">
             <tree string="Task List">
                 <field name="user_name"/>
+                <field name="mobile"/>
+                <field name="age"/>
                 <field name="total"/>
                 <field name="remarks"/>
                 <field name="state"/>
