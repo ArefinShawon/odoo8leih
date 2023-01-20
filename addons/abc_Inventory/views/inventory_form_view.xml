@@ -16,8 +16,9 @@
                     <group>
                         <group>
                             <field name="customer_name"/>
-                            <field name="age"/>
-                            <field name="phone" onchange="validate_phone(phone)" placeholder="Enter your mobile number"/>
+                            <field name="age" confirm="Sure?"/>
+                            <field name="email"/>
+                            <field name="phone" placeholder="Enter your mobile number"/>
                         </group>
                         <group>
                             <group>
